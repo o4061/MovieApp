@@ -5,7 +5,7 @@ import com.userfaltakas.movieapp.data.movie.MovieResult
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UpcomingMoviesResponse(
+data class MoviesResponse(
     val page: Int = -1,
     val results: List<MovieResult> = emptyList(),
     val total_pages: Int = -1,

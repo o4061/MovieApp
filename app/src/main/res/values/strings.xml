@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="release_date">2000</string>
+    <string name="vote_average">5,7</string>
+    <string name="original_title">Monster hunters</string>
+    <string name="genre">Action</string>
+    <string name="language">en</string>
+    <string name="posterDescription">poster of the movie</string>
+    <string name="backdropDescription">backdrop of the movie</string>
+    <string name="score">score</string>
+    <string name="popularity">0.5</string>
+    <string name="rateThis">Rate This</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="thumbIconDescription">thumbIcon</string>
+    <string name="buttonRateThisDescription">rateThis button</string>
+    <string name="buttonAddToFavoriteDescription">add to favorite button</string>
+    <string name="backButtonDescription">back button</string>
+    <string name="timeImageDescription">icon for runtime</string>
+    <string name="runtime">1h 12m</string>
+    <string name="status">Released</string>
+    <string name="overview">A portal transports Cpt. Artemis and an elite unit of soldiers to a strange world where powerful monsters rule with deadly ferocity. Faced with relentless danger, the team encounters a mysterious hunter who may be their only hope to find a way home.</string>
 </resources>

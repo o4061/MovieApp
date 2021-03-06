@@ -1,10 +1,12 @@
-package com.userfaltakas.movieapp.data.movie
+package com.userfaltakas.movieapp.database.entities
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.userfaltakas.movieapp.data.movie.Genre
 
-@Parcelize
-data class MovieDetailResult(
+@Entity(tableName = "movie_table")
+data class MovieDB(
+    @PrimaryKey(autoGenerate = false)
     val backdrop_path: String,
     val genres: List<Genre>,
     val id: Int,
@@ -17,4 +19,4 @@ data class MovieDetailResult(
     val runtime: Int,
     val status: String,
     val vote_average: Double,
-) : Parcelable
+)
