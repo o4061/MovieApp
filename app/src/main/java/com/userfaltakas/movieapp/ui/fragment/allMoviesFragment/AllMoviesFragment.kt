@@ -1,13 +1,15 @@
-package com.userfaltakas.movieapp.ui.fragment
+package com.userfaltakas.movieapp.ui.fragment.allMoviesFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.userfaltakas.movieapp.communicator.Communicator
+import com.userfaltakas.movieapp.data.enums.MovieTypeRequest
 import com.userfaltakas.movieapp.data.enums.NetworkState
 import com.userfaltakas.movieapp.data.movie.MovieDetailResult
 import com.userfaltakas.movieapp.data.movie.MoviesResult
@@ -31,18 +33,27 @@ class AllMoviesFragment : Fragment() {
         private val bundle = Bundle()
         private val fragment = AllMoviesFragment()
 
-        fun newInstanceMovies(movies: MoviesResult, code: Int): AllMoviesFragment {
+        fun newInstanceMovies(
+            movies: MoviesResult,
+            code: Int,
+            movieTypeRequest: MovieTypeRequest
+        ): AllMoviesFragment {
             bundle.apply {
                 putParcelable("MOVIES", movies)
                 putInt("CODE", code)
+                putParcelable("TYPE_REQUEST", movieTypeRequest)
             }
 
             fragment.arguments = bundle
             return fragment
         }
 
-        fun getArgs(): MoviesResult? {
+        fun getMoviesArg(): MoviesResult? {
             return fragment.arguments?.getParcelable("MOVIES")
+        }
+
+        fun getRequestTypeArg(): MovieTypeRequest? {
+            return fragment.arguments?.getParcelable("TYPE_REQUEST")
         }
     }
 
@@ -65,7 +76,7 @@ class AllMoviesFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(StartPageViewModel::class.java)
 
-        val lambda = { movieId: Int ->
+        val sendMovieToDetailMovieFragment = { movieId: Int ->
             if (context?.let { NetworkListener().checkNetworkAvailability(it) } == NetworkState.CONNECTED) {
                 viewModel.getMovieDetails(movieId)
                 var code: Int
@@ -81,13 +92,23 @@ class AllMoviesFragment : Fragment() {
             }
         }
 
-        val movies = getArgs()
-        val adapter = movies?.let { MovieAdapter(movies, lambda) }
+        val movies = getMoviesArg()
+
+        when (getRequestTypeArg()) {
+            MovieTypeRequest.Popular -> binding.progressBar.visibility = View.VISIBLE
+            MovieTypeRequest.Upcoming -> binding.progressBar.visibility = View.VISIBLE
+            MovieTypeRequest.Search -> binding.progressBar.visibility = View.GONE
+            MovieTypeRequest.Favorites -> binding.progressBar.visibility = View.GONE
+        }
+        val adapter =
+            movies?.let {
+
+                MovieAdapter(movies, sendMovieToDetailMovieFragment)
+
+            }
 
         binding.recycleView.adapter = adapter
         binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
-
-
     }
 
     override fun onDestroy() {

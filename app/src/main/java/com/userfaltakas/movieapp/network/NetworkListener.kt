@@ -7,9 +7,10 @@ import android.net.NetworkCapabilities
 import com.userfaltakas.movieapp.data.enums.NetworkState
 
 class NetworkListener : ConnectivityManager.NetworkCallback() {
-    private lateinit var networkState: NetworkState
+    private var networkState = NetworkState.DISCONNECTED
 
     fun checkNetworkAvailability(context: Context): NetworkState {
+
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.registerDefaultNetworkCallback(this)
@@ -26,7 +27,11 @@ class NetworkListener : ConnectivityManager.NetworkCallback() {
             }
         }
 
-        networkState = NetworkState.CONNECTED
+        networkState = if (isConnected) {
+            NetworkState.CONNECTED
+        } else {
+            NetworkState.DISCONNECTED
+        }
 
         return networkState
     }

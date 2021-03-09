@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class MoviesResult() : ArrayList<MovieResult>(), Parcelable
+class MoviesResult : ArrayList<MovieResult>(), Parcelable

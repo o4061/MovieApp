@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popularMoviesItem"
+        android:icon="@drawable/movie_white"
+        android:title="Popular" />
+
+    <item
+        android:id="@+id/upcomingMovingItem"
+        android:icon="@drawable/upcoming_white"
+        android:title="Upcoming" />
+
+    <item
+        android:id="@+id/searchMoviesItem"
+        android:icon="@drawable/search_white"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/favoriteMoviesItem"
+        android:icon="@drawable/favorite_white"
+        android:title="Favorites" />
+
+</menu>

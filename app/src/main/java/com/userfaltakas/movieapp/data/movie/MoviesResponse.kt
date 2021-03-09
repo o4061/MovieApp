@@ -1,4 +1,4 @@
-package com.userfaltakas.movieapp.data.upcomingMovies
+package com.userfaltakas.movieapp.data.movie
 
 import android.os.Parcelable
 import com.userfaltakas.movieapp.data.movie.MovieResult

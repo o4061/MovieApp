@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
         android:paddingBottom="18dp"
-        tools:context=".ui.fragment.DetailMovieFragment">
+        tools:context=".ui.fragment.detailMovieFragment.DetailMovieFragment">
 
 
         <ImageView
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/backdrop400" />
+            app:srcCompat="@drawable/backdrop2" />
 
         <TextView
             android:id="@+id/textViewDetailMovieTitle"
@@ -232,24 +232,22 @@
 
         <ImageButton
             android:id="@+id/imageButtonAddToFavorite"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:background="@null"
             android:contentDescription="@string/buttonAddToFavoriteDescription"
+            android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageViewBackDrop"
             app:srcCompat="@drawable/favorite_border_white" />
 
         <ImageButton
             android:id="@+id/imageButtonBack"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:background="@null"
             android:contentDescription="@string/backButtonDescription"
+            android:padding="15dp"
             app:layout_constraintStart_toStartOf="@+id/imageViewBackDrop"
             app:layout_constraintTop_toTopOf="@+id/imageViewBackDrop"
             app:srcCompat="@drawable/arrow_back_white" />
@@ -260,10 +258,10 @@
             android:layout_height="33dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/timeImageDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider3"
-            app:srcCompat="@drawable/time_white"
-            android:contentDescription="@string/timeImageDescription" />
+            app:srcCompat="@drawable/time_white" />
 
         <TextView
             android:id="@+id/textViewRuntime"
@@ -282,12 +280,55 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:textSize="25sp"
             android:text="@string/status"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
 
+        <FrameLayout
+            android:id="@+id/frameLayoutForRating"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBackDrop">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:stepSize="0.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/buttonApplyRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/blue"
+                    android:text="@string/apply"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

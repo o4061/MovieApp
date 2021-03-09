@@ -1,5 +1,9 @@
 package com.userfaltakas.movieapp.data.enums
 
-enum class MovieTypeRequest {
-    Upcoming, Popular
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class MovieTypeRequest : Parcelable {
+    Upcoming, Popular, Search, Favorites
 }

@@ -8,7 +8,7 @@ import com.userfaltakas.movieapp.database.entities.MovieDB
 
 @Database(
     entities = [MovieDB::class],
-    version = 1
+    version = 3
 )
 
 abstract class FavoriteMoviesDatabase : RoomDatabase() {
@@ -23,7 +23,7 @@ abstract class FavoriteMoviesDatabase : RoomDatabase() {
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     FavoriteMoviesDatabase::class.java,
-                    "post_database"
+                    "movie_database"
                 ).fallbackToDestructiveMigration()
                     .build().apply {
                         INSTANCE = this

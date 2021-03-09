@@ -11,7 +11,7 @@ interface MovieDao {
     @Delete
     suspend fun removeMovie(movie: MovieDB)
 
-    @Query("SELECT id FROM movie_table WHERE id= :id")
+    @Query("SELECT EXISTS(SELECT id FROM movie_table WHERE id= :id)")
     suspend fun checkIfMovieIsSaved(id: Int): Boolean
 
     @Query("SELECT * FROM movie_table")

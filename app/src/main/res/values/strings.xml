@@ -18,5 +18,6 @@
     <string name="timeImageDescription">icon for runtime</string>
     <string name="runtime">1h 12m</string>
     <string name="status">Released</string>
+    <string name="apply">Apply</string>
     <string name="overview">A portal transports Cpt. Artemis and an elite unit of soldiers to a strange world where powerful monsters rule with deadly ferocity. Faced with relentless danger, the team encounters a mysterious hunter who may be their only hope to find a way home.</string>
 </resources>
