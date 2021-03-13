@@ -81,10 +81,6 @@ class DetailMovieFragment : Fragment() {
             movie?.let { it1 -> addAndRemoveMovieFromDb(it1) }
         }
 
-        binding.imageButtonBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
         binding.imageButtonRateThis.setOnClickListener {
             rateMovie()
         }

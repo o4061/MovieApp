@@ -1,6 +1,7 @@
 package com.userfaltakas.movieapp.ui.fragment.allMoviesFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.userfaltakas.movieapp.communicator.Communicator
 import com.userfaltakas.movieapp.data.enums.MovieTypeRequest
 import com.userfaltakas.movieapp.data.enums.NetworkState
 import com.userfaltakas.movieapp.data.movie.MovieDetailResult
 import com.userfaltakas.movieapp.data.movie.MoviesResult
 import com.userfaltakas.movieapp.databinding.FragmentAllMoviesBinding
+import com.userfaltakas.movieapp.movieDbCalls.MovieDbCalls
 import com.userfaltakas.movieapp.network.NetworkListener
 import com.userfaltakas.movieapp.repository.Repository
 import com.userfaltakas.movieapp.ui.activity.startPage.StartPageViewModel
@@ -24,10 +27,12 @@ class AllMoviesFragment : Fragment() {
     private var _binding: FragmentAllMoviesBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var movieDbCalls: MovieDbCalls
     private lateinit var communicator: Communicator
     private lateinit var repository: Repository
     private lateinit var viewModelFactory: StartPageViewModelFactory
     private lateinit var viewModel: StartPageViewModel
+    private lateinit var layoutManager: LinearLayoutManager
 
     companion object {
         private val bundle = Bundle()
@@ -65,16 +70,19 @@ class AllMoviesFragment : Fragment() {
     ): View {
         _binding = FragmentAllMoviesBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        movieDbCalls = activity as MovieDbCalls
         communicator = activity as Communicator
         repository = Repository()
         viewModelFactory = StartPageViewModelFactory(repository)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(StartPageViewModel::class.java)
+
 
         val sendMovieToDetailMovieFragment = { movieId: Int ->
             if (context?.let { NetworkListener().checkNetworkAvailability(it) } == NetworkState.CONNECTED) {
@@ -92,6 +100,7 @@ class AllMoviesFragment : Fragment() {
             }
         }
 
+
         val movies = getMoviesArg()
 
         when (getRequestTypeArg()) {
@@ -102,13 +111,27 @@ class AllMoviesFragment : Fragment() {
         }
         val adapter =
             movies?.let {
-
                 MovieAdapter(movies, sendMovieToDetailMovieFragment)
-
             }
+        val count = adapter?.itemCount
+        if (count != null && count != 0) {
+            adapter.notifyDataSetChanged()
+        }
+
+
+        layoutManager = LinearLayoutManager(context)
+        binding.recycleView.layoutManager = layoutManager
 
         binding.recycleView.adapter = adapter
-        binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == movies?.size?.minus(1)) {
+                    //TODO update recyclerView
+                }
+            }
+        })
     }
 
     override fun onDestroy() {

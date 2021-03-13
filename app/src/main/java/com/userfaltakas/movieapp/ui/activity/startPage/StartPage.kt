@@ -30,6 +30,7 @@ class StartPage : AppCompatActivity(), Communicator, MovieDbCalls, SearchView.On
     private lateinit var viewModel: StartPageViewModel
 
     private lateinit var binding: StartPageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = StartPageBinding.inflate(layoutInflater)
@@ -135,13 +136,12 @@ class StartPage : AppCompatActivity(), Communicator, MovieDbCalls, SearchView.On
                 MovieTypeRequest.Popular -> viewModel.getPopularMovies(movieTitle.toInt())
                 MovieTypeRequest.Upcoming -> viewModel.getUpcomingMovies(movieTitle.toInt())
                 MovieTypeRequest.Search -> viewModel.getMoviesByTitle(movieTitle)
+                else -> return
             }
 
             viewModel.movies.observe(this, { response ->
                 if (response.isSuccessful) {
                     code = response.code()
-                    Log.d("total pages", response.body()?.total_pages.toString())
-                    Log.d("total results", response.body()?.total_results.toString())
                     response.body()?.results?.forEach {
                         if (it.poster_path == null || it.backdrop_path == null) {
                             return@forEach

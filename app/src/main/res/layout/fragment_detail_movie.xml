@@ -241,16 +241,6 @@
             app:layout_constraintTop_toTopOf="@+id/imageViewBackDrop"
             app:srcCompat="@drawable/favorite_border_white" />
 
-        <ImageButton
-            android:id="@+id/imageButtonBack"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/backButtonDescription"
-            android:padding="15dp"
-            app:layout_constraintStart_toStartOf="@+id/imageViewBackDrop"
-            app:layout_constraintTop_toTopOf="@+id/imageViewBackDrop"
-            app:srcCompat="@drawable/arrow_back_white" />
 
         <ImageView
             android:id="@+id/imageView2"
